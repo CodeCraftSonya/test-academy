@@ -11,6 +11,7 @@
   --main-font: "Rubik";
   --accent-font: "TurismoCF";
 }
+
 *,
 *::before,
 *::after {
@@ -86,6 +87,39 @@ figure {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.header-label {
+  position: absolute;
+  top: 0;
+  left: 14.7%;
+  width: 48px;
+  height: 114px;
+  background: var(--white-color);
+  border-radius: 0 0 22px 22px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
+.header-label__icon-wrapper {
+  width: 62.5%;
+  background-color: var(--dark-blue-color);
+  border-radius: 0 0 20px 20px;
+}
+
+.header-label__icon {
+  width: 30px;
+  height: 30px;
+}
+
+.header-label__text {
+  rotate: 270deg;
+  color: var(--dark-blue-color);
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .heading {
@@ -365,10 +399,31 @@ figure {
 }
 
 @media (max-width: 1600px) {
+  .header-label {
+    left: 16px;
+    height: 100px;
+    width: 42px;
+  }
+
+  .header-label__text {
+    font-size: 14px;
+  }
+
+  .header-label__icon-wrapper {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header-label__icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .content__wrapper {
     width: 100%;
     margin-block-start: 9px;
   }
+
   .content__block {
     margin-inline: 16px;
   }
@@ -376,6 +431,7 @@ figure {
   .content__title {
     margin-inline-start: 15px;
   }
+
   .content__card {
     width: 312px;
   }
@@ -384,6 +440,7 @@ figure {
     font-size: 20px;
     margin-bottom: 28px;
   }
+
   .page {
     padding-bottom: 24px;
   }
@@ -433,7 +490,7 @@ figure {
   }
 }
 
-@media (max-width: 925px) {
+@media (max-width: 780px) {
   .page {
     padding-bottom: 14px;
   }
@@ -441,16 +498,36 @@ figure {
   .header__title {
     font-size: 38px;
   }
+
+  .header-label {
+    rotate: -90deg;
+    top: -17px;
+    left: 24px;
+    height: 90px;
+    width: 42px;
+  }
+
+  .header-label__icon {
+    rotate: 90deg;
+  }
+
+  .header-label__text {
+    rotate: 90deg;
+  }
+
   .circles-wrapper {
     width: 95.5%;
     height: 160px;
   }
+
   .circle {
     width: 21.36%;
   }
+
   .circle--one {
     top: 0;
   }
+
   .circle--two {
     top: 0;
     left: 20%;
@@ -518,7 +595,19 @@ figure {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
+  .page:after {
+    display: none;
+  }
+
+  .page:before {
+    width: 100%;
+  }
+
+  .header-label {
+    top: 40px;
+  }
+
   .circle {
     width: 37%;
   }
@@ -528,6 +617,7 @@ figure {
     bottom: 6px;
     transform: none;
   }
+
   .circle--one,
   .circle--two,
   .circle--four,
@@ -539,6 +629,7 @@ figure {
     width: 197px;
     height: 50px;
   }
+
   .circle--one:before,
   .circle--two:before,
   .circle--four:before,
