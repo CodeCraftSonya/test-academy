@@ -17,7 +17,13 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .page {
+  position: relative;
   min-width: 360px;
   min-inline-size: 360px;
   margin: 0 auto;
@@ -30,7 +36,34 @@
   font-family: var(--main-font), sans-serif;
   font-size: 16px;
   font-weight: 400;
+  min-height: 100%;
+  height: auto;
 }
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-repeat: repeat-y;
+  background-size: contain;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.page::before {
+  width: 22.2vw;
+  left: 0;
+  background-image: url("../images/bg-left.png");
+}
+
+.page::after {
+  width: 18.7vw;
+  right: 0;
+  background-image: url("../images/bg-right.png");
+}
+
 h1,
 h2,
 h3 {
@@ -65,6 +98,7 @@ figure {
   font-size: 60px;
   margin-top: 8px;
   margin-bottom: 32px;
+  letter-spacing: 5.5px;
 }
 
 .circle-nav {
@@ -93,11 +127,42 @@ figure {
   color: var(--white-color);
 }
 
+.circle:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 50%;
+  width: 100%;
+  background-size: contain;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("../images/circle-decoration.png");
+}
+
+.circle:before {
+  content: "";
+  position: absolute;
+  height: 108%;
+  width: 108%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid transparent;
+  border-radius: 50%;
+  background-size: contain;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .circle--one {
   top: clamp(1.313rem, 0.826rem + 0.761vw, 1.625rem);
   left: 0.7%;
   z-index: 0;
   background-color: var(--accent-color);
+}
+
+.circle--one:before {
+  border-color: var(--accent-color);
 }
 
 .circle--two {
@@ -106,6 +171,10 @@ figure {
   z-index: 1;
   background-color: var(--dark-blue-color);
   width: 21.57%;
+}
+
+.circle--two:before {
+  border-color: var(--dark-blue-color);
 }
 
 .circle--three {
@@ -118,6 +187,10 @@ figure {
   flex-direction: row;
 }
 
+.circle--three:before {
+  border-color: var(--main-text-color);
+}
+
 .circle--four {
   top: 5px;
   right: 15%;
@@ -126,12 +199,21 @@ figure {
   width: 19.61%;
 }
 
+.circle--four:before {
+  border-color: var(--light-blue-color);
+}
+
 .circle--five {
   top: clamp(5.875rem, 3.7287rem + 3.3537vw, 7.25rem);
   right: 0.8%;
   z-index: 0;
   background-color: var(--grey-color);
 }
+
+.circle--five:before {
+  border-color: var(--grey-color);
+}
+
 .main-character {
   position: absolute;
   bottom: 0;
@@ -218,9 +300,11 @@ figure {
   width: 280px;
   border: 4px solid rgba(41, 122, 191, 0.3);
   border-radius: 12px;
+  background-color: var(--white-color);
 }
 .content__card-header {
   padding: 16px 16px 0;
+  border-radius: 8px 8px 0 0;
 }
 
 .content__card-title {
@@ -239,23 +323,73 @@ figure {
   width: 32px;
 }
 
+.content__card-icon-next {
+  fill: var(--main-text-color);
+}
+
+.content__card-icon-next:hover {
+  cursor: pointer;
+  fill: var(--light-blue-color);
+}
+
 .content__card-footer {
   height: 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-inline: 16px;
-  background-color: #3d97dc;
+  background-color: #e7f0fa;
   border-radius: 0 0 8px 8px;
+}
+
+.content__card-date-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.content__card-date {
+  font-weight: 500;
 }
 
 .content__card:nth-child(2) .content__card-title {
   margin-block-end: 10px;
 }
 
-@media (max-width: 1650px) {
-  .content {
+.date-icon {
+  width: 24px;
+}
+
+.date--live {
+  color: var(--accent-color);
+}
+
+@media (max-width: 1600px) {
+  .content__wrapper {
     width: 100%;
+    margin-block-start: 9px;
+  }
+  .content__block {
+    margin-inline: 16px;
+  }
+
+  .content__title {
+    margin-inline-start: 15px;
+  }
+  .content__card {
+    width: 312px;
+  }
+
+  .content__card-title {
+    font-size: 20px;
+    margin-bottom: 28px;
+  }
+  .page {
+    padding-bottom: 24px;
+  }
+
+  .header__title {
+    letter-spacing: -0.5px;
   }
 }
 
@@ -296,5 +430,197 @@ figure {
 
   .content__title {
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 925px) {
+  .page {
+    padding-bottom: 14px;
+  }
+
+  .header__title {
+    font-size: 38px;
+  }
+  .circles-wrapper {
+    width: 95.5%;
+    height: 160px;
+  }
+  .circle {
+    width: 21.36%;
+  }
+  .circle--one {
+    top: 0;
+  }
+  .circle--two {
+    top: 0;
+    left: 20%;
+  }
+
+  .circle--three {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .circle--four {
+    top: 0;
+    right: 20%;
+  }
+
+  .circle--five {
+    top: 0;
+  }
+
+  .circle__text,
+  .circle__text--paragraph {
+    font-size: 16px;
+  }
+
+  .circle__text--paragraph {
+    margin-block-start: 0;
+  }
+
+  .circle--two .circle__icon {
+    margin-top: 25px;
+  }
+
+  .circle--four .circle__icon {
+    margin-top: 20px;
+  }
+
+  .circle__icon {
+    width: 33%;
+    margin-top: 25px;
+  }
+
+  .circle__text {
+    margin-top: 10px;
+  }
+
+  .circle__text--small {
+    font-size: 14px;
+  }
+
+  .content__wrapper {
+    margin-block-start: 11px;
+  }
+
+  .content__title {
+    font-size: 1.5rem;
+  }
+
+  .content__card {
+    width: 328px;
+  }
+
+  .content__block {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .circle {
+    width: 37%;
+  }
+  .circle--three {
+    left: 5px;
+    top: auto;
+    bottom: 6px;
+    transform: none;
+  }
+  .circle--one,
+  .circle--two,
+  .circle--four,
+  .circle--five {
+    border-radius: 50px;
+    left: auto;
+    right: 0;
+    top: 0;
+    width: 197px;
+    height: 50px;
+  }
+  .circle--one:before,
+  .circle--two:before,
+  .circle--four:before,
+  .circle--five:before,
+  .circle--one:after,
+  .circle--two:after,
+  .circle--four:after,
+  .circle--five:after {
+    display: none;
+  }
+
+  .header__title {
+    margin-bottom: 9px;
+  }
+
+  .circles-wrapper {
+    height: 224px;
+  }
+
+  .circle {
+    flex-direction: row;
+    align-items: center;
+    padding-inline-start: 9px;
+  }
+
+  .circle__text {
+    margin-block-start: 0;
+  }
+
+  .circle__icon {
+    width: 17.26%;
+    margin-top: 0;
+  }
+
+  .circle--four .circle__icon,
+  .circle--two .circle__icon {
+    margin-top: 0;
+  }
+
+  .circle--one {
+    gap: 14px;
+  }
+
+  .circle--two {
+    top: 58px;
+    gap: 10px;
+  }
+
+  .circle--four {
+    top: 116px;
+    gap: 31px;
+  }
+
+  .circle--five {
+    top: 174px;
+    gap: 25px;
+  }
+
+  .content__wrapper {
+    margin-block-start: 21px;
+  }
+
+  .content__block {
+    margin-inline: 8px;
+  }
+
+  .content__card {
+    width: 320px;
+    height: 162px;
+  }
+
+  .content__title {
+    font-size: 1.25rem;
+    margin-inline-start: 8px;
+  }
+
+  .content__card-title {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .content__card-description {
+    font-size: 14px;
   }
 }
